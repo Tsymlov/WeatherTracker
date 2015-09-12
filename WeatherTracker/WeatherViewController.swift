@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
 
@@ -16,5 +17,31 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var forecastLabel1: UILabel!
     @IBOutlet weak var forecastLabel2: UILabel!
     @IBOutlet weak var forecastLabel3: UILabel!
+    
+    private var locationManager: CLLocationManager!{
+        didSet{
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    override func viewDidLoad() {
+        locationManager = CLLocationManager()
+    }
 }
 
+extension WeatherViewController: CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var location:CLLocation = locations[locations.count-1] as! CLLocation
+        if (location.horizontalAccuracy <= 0) { return }
+        self.locationManager.stopUpdatingLocation()
+        println(location)
+        //requestWeatherInfo(location.coordinate)
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println(error.localizedDescription)
+    }
+}
