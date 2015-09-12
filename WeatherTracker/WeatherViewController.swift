@@ -29,7 +29,7 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private var weatherInfo: WeatherInfo!
+    private var weatherInfo: WeatherInfo = WeatherInfo()
     
     override func viewDidLoad() {
         locationManager = CLLocationManager()
@@ -56,7 +56,12 @@ class WeatherViewController: UIViewController {
     }
     
     private func initializeWeatherInfo(json: JSON){
+        if (json["cod"] == "404"){
+            cityLabel.text == "Error 404"
+            return
+        }
         weatherInfo.temperature = round(json["list"][0]["main"]["temp"].double! - 273.15)
+        
         weatherInfo.cityName = json["city"]["name"].stringValue ?? "unknown"
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "HH:mm"
@@ -69,7 +74,8 @@ class WeatherViewController: UIViewController {
     
     private func refreshUI(){
         cityLabel.text = "City: " + weatherInfo.cityName
-        temperatureLabel.text = "Current temperature: \(weatherInfo.temperature!)"
+        var temperature = weatherInfo.temperature ?? 99999.999
+        temperatureLabel.text = "Current temperature: \(temperature)"
         forecastLabel0.text = "\(weatherInfo.forecast[0].0) : \(weatherInfo.forecast[0].1!)"
         forecastLabel1.text = "\(weatherInfo.forecast[1].0) : \(weatherInfo.forecast[1].1!)"
         forecastLabel2.text = "\(weatherInfo.forecast[2].0) : \(weatherInfo.forecast[2].1!)"
@@ -83,7 +89,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
         if (location.horizontalAccuracy <= 0) { return }
         self.locationManager.stopUpdatingLocation()
         println(location)
-        //requestWeatherInfo(location.coordinate)
+        requestWeatherInfo(location.coordinate)
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
