@@ -77,11 +77,9 @@
 		3D1E18971BA4174D005ED90E /* WeatherTracker */ = {
 			isa = PBXGroup;
 			children = (
-				3D1E189A1BA4174D005ED90E /* AppDelegate.swift */,
-				3D1E189C1BA4174D005ED90E /* ViewController.swift */,
-				3D1E189E1BA4174D005ED90E /* Main.storyboard */,
-				3D1E18A11BA4174D005ED90E /* Images.xcassets */,
-				3D1E18A31BA4174D005ED90E /* LaunchScreen.xib */,
+				3D1E18BC1BA417AE005ED90E /* Controllers */,
+				3D1E18BB1BA417A2005ED90E /* Models */,
+				3D1E18BA1BA4178A005ED90E /* Views */,
 				3D1E18981BA4174D005ED90E /* Supporting Files */,
 			);
 			path = WeatherTracker;
@@ -90,6 +88,8 @@
 		3D1E18981BA4174D005ED90E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3D1E18A11BA4174D005ED90E /* Images.xcassets */,
+				3D1E189A1BA4174D005ED90E /* AppDelegate.swift */,
 				3D1E18991BA4174D005ED90E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +110,30 @@
 				3D1E18AF1BA4174E005ED90E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3D1E18BA1BA4178A005ED90E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3D1E189E1BA4174D005ED90E /* Main.storyboard */,
+				3D1E18A31BA4174D005ED90E /* LaunchScreen.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3D1E18BB1BA417A2005ED90E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3D1E18BC1BA417AE005ED90E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3D1E189C1BA4174D005ED90E /* ViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
